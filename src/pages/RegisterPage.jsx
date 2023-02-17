@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../Header";
 
@@ -7,6 +7,8 @@ const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const[redirect,setRedirect]=useState(false);
 
   const registerUser = async (e) => {
     e.preventDefault();
@@ -15,12 +17,17 @@ const RegisterPage = () => {
         name,
         email,
         password,
+        phone,
       });
       alert(`Successfully registered now you can log in`);
+      setRedirect(true);
     } catch (error) {
       alert("Registration failed. Please try again later.");
     }
   };
+  if(redirect){
+    return (<Navigate to={"/login"}/>)
+  }
   return (
     <div className="py-4 flex flex-col min-h-screen">
       <Header />
@@ -30,7 +37,7 @@ const RegisterPage = () => {
           <form className="max-w-md mx-auto" onSubmit={registerUser}>
             <input
               type="text"
-              placeholder="John Doe"
+              placeholder="Rohit Koner"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -39,6 +46,12 @@ const RegisterPage = () => {
               placeholder="your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="123789321"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
             <input
               type="password"

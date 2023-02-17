@@ -58,7 +58,7 @@ const Header = ({getPlaces,searchBy}) => {
       </div>
       <Link
         to={user ? "/account" : "/login"}
-        className="flex items-center border border-gray-400 gap-2 rounded-full py-1 px-2"
+        className="flex items-center border border-primary gap-2 rounded-full py-1 px-2"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +74,7 @@ const Header = ({getPlaces,searchBy}) => {
             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
           />
         </svg>
-        <div className="bg-gray-500 text-white rounded-full border border-gray-500 overflow-hidden">
+        <div className="bg-primary text-white rounded-full border border-gray-500 overflow-hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"

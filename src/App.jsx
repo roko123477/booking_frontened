@@ -12,11 +12,15 @@ import PlacesFormPage from "./pages/PlacesFormPage";
 import PlacePage from './pages/PlacePage';
 import BookingsPage from './pages/BookingsPage';
 import BookingPage from './pages/BookingPage';
+import Isauthor from "./Isauthor";
+import CheckoutForm from "./checkout/CheckoutForm";
+
 
 axios.defaults.baseURL = "http://127.0.0.1:4000";
 axios.defaults.withCredentials = true;
 //TODO:npm run dev for vite
 function App() {
+
   return (
     <UserContextProvider>
       <Routes>
@@ -31,6 +35,9 @@ function App() {
           <Route path="/account/bookings" element={<BookingsPage />} />
           <Route path="/account/bookings/:id" element={<BookingPage />} />
           <Route path="/place/:id" element={<PlacePage />} />
+          <Route path="/isauthor" element={<Isauthor />} />
+         
+          <Route path="/form" element={<CheckoutForm />} />
          
         </Route>
       </Routes>

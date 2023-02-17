@@ -27,7 +27,7 @@ const IndexPage = () => {
   }
   return (
     <div className="py-4">
-      <Header getPlaces={handlePlaces} searchBy={"Search By Address"}/>
+      <Header getPlaces={handlePlaces} searchBy={"Search By Places"}/>
       <div className="mt-8 grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
         {places.length > 0 &&
           places.map((place, i) => (

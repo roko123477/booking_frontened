@@ -15,9 +15,8 @@ export default function PlacePage() {
     }
     axios.get(`/places/${id}`).then((response) => {
       setPlace(response.data);
-    });
+    });   
   }, [id]);
-
   if (!place) return "";
 
   //map
@@ -25,7 +24,7 @@ export default function PlacePage() {
     <div className="py-4">
       <Header />
       <div className="container mx-auto">
-        <div className="mt-4 bg-gray-200 container mx-auto px-8 pt-8">
+        <div className="mt-4 bg-gray-200 container mx-auto px-8 pt-8 rounded-3xl">
           <Link to={"/"} className="text-3xl">
             {place.title}
           </Link>
