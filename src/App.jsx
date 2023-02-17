@@ -13,7 +13,7 @@ import PlacePage from './pages/PlacePage';
 import BookingsPage from './pages/BookingsPage';
 import BookingPage from './pages/BookingPage';
 import Isauthor from "./Isauthor";
-import CheckoutForm from "./checkout/CheckoutForm";
+
 
 
 axios.defaults.baseURL = "http://127.0.0.1:4000";
@@ -37,7 +37,7 @@ function App() {
           <Route path="/place/:id" element={<PlacePage />} />
           <Route path="/isauthor" element={<Isauthor />} />
          
-          <Route path="/form" element={<CheckoutForm />} />
+         
          
         </Route>
       </Routes>

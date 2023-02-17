@@ -20,7 +20,7 @@ const BookingWidget = ({ place }) => {
   const [mobile, setMobile] = useState("");
   // const [redirect, setRedirect] = useState("");
   // const [dateBetween, setDateBetween] = useState(false);
-  const [numberOfNights, setNumberofnights] = useState(0);
+  const [numberOfNights, setNumberofnights] = useState(1000000000);
 //  let numberOfNights = 0;
 //  if (checkIn && checkOut) {
 //   numberOfNights=(
@@ -121,7 +121,7 @@ const BookingWidget = ({ place }) => {
             onChange={(e) => setNumberOfGuests(e.target.value)}
           />
         </div>
-        {numberOfNights > 0 && (
+        {numberOfNights > 0 && numberOfNights!==1000000000 &&(
           <div className="py-3 px-4 border-t">
             <label htmlFor="">Your Full Name:</label>
             <input
@@ -142,7 +142,7 @@ const BookingWidget = ({ place }) => {
       {numberOfNights <= 0 && (
         <span className="bg-primary text-white py-2 px-1 my-3 rounded-xl">you have already booked between these dates</span>
       )}
-      {numberOfNights > 0 && (
+      {numberOfNights > 0 && numberOfNights!==1000000000 && (
         
           <button onClick={bookThisPlace} className="primary mt-4">
             Book this place
