@@ -21,19 +21,16 @@ const BookingWidget = ({ place }) => {
   // const [redirect, setRedirect] = useState("");
   // const [dateBetween, setDateBetween] = useState(false);
   const [numberOfNights, setNumberofnights] = useState(1000000000);
-//  let numberOfNights = 0;
-//  if (checkIn && checkOut) {
-//   numberOfNights=(
-//      differenceInCalendarDays(new Date(checkOut), new Date(checkIn))
-//    );
+  //  let numberOfNights = 0;
+  //  if (checkIn && checkOut) {
+  //   numberOfNights=(
+  //      differenceInCalendarDays(new Date(checkOut), new Date(checkIn))
+  //    );
 
-   
-
- //  console.log(numberOfNights);
- //}
+  //  console.log(numberOfNights);
+  //}
   const { user } = useContext(UserContext);
   const isAuthor = JSON.stringify(user._id) === JSON.stringify(place.owner);
-   
 
   useEffect(() => {
     if (user) {
@@ -47,17 +44,22 @@ const BookingWidget = ({ place }) => {
     });
   }, []);
 
-  useEffect(()=>{
-    if(checkIn && checkOut) {
-      axios.post("/check-same-date",{checkIn,checkOut,userId:user._id,placeId:place._id}).then((response)=>{
-        console.log(response);
-        setNumberofnights(response.data.noofnights);
-      })
-      .catch((err)=>console.log(err));
+  useEffect(() => {
+    if (checkIn && checkOut) {
+      axios
+        .post("/check-same-date", {
+          checkIn,
+          checkOut,
+          userId: user._id,
+          placeId: place._id,
+        })
+        .then((response) => {
+          console.log(response);
+          setNumberofnights(response.data.noofnights);
+        })
+        .catch((err) => console.log(err));
     }
-  },[checkOut,checkIn]);
-  
-  
+  }, [checkOut, checkIn]);
 
   const bookThisPlace = async () => {
     // else {
@@ -69,16 +71,15 @@ const BookingWidget = ({ place }) => {
       phone: mobile,
       place: place._id,
       price: numberOfNights * place.price,
-      
     };
     const response = await axios.post("/booking", data);
-   // console.log(response);
-    window.location.href=response.data.url;
+    // console.log(response);
+    window.location.href = response.data.url;
     // }
 
     //  console.log(dateBetween);
   };
- // console.log(numberOfNights);
+  // console.log(numberOfNights);
   if (isAuthor) {
     return <Navigate to={"/isauthor"} />;
   }
@@ -121,7 +122,7 @@ const BookingWidget = ({ place }) => {
             onChange={(e) => setNumberOfGuests(e.target.value)}
           />
         </div>
-        {numberOfNights > 0 && numberOfNights!==1000000000 &&(
+        {numberOfNights > 0 && numberOfNights !== 1000000000 && (
           <div className="py-3 px-4 border-t">
             <label htmlFor="">Your Full Name:</label>
             <input
@@ -140,23 +141,22 @@ const BookingWidget = ({ place }) => {
         )}
       </div>
       {numberOfNights <= 0 && (
-        <span className="bg-primary text-white py-2 px-1 my-3 rounded-xl">you have already booked between these dates</span>
+        <span className="bg-primary text-white py-2 px-1 my-3 rounded-xl">
+          you have already booked between these dates
+        </span>
       )}
-      {numberOfNights > 0 && numberOfNights!==1000000000 && (
-        
-          <button onClick={bookThisPlace} className="primary mt-4">
-            Book this place
-            {numberOfNights > 0 && (
-              <>
-                <span> for &#8377;{numberOfNights * place.price}</span>
-              </>
-            )}
-          </button>
-      //  </StripeCheckout>
+      {numberOfNights > 0 && numberOfNights !== 1000000000 && (
+        <button onClick={bookThisPlace} className="primary mt-4">
+          Book this place
+          {numberOfNights > 0 && (
+            <>
+              <span> for &#8377;{numberOfNights * place.price}</span>
+            </>
+          )}
+        </button>
+        //  </StripeCheckout>
       )}
-      
     </div>
-
   );
 };
 

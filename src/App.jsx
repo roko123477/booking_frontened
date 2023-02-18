@@ -13,6 +13,7 @@ import PlacePage from './pages/PlacePage';
 import BookingsPage from './pages/BookingsPage';
 import BookingPage from './pages/BookingPage';
 import Isauthor from "./Isauthor";
+import CancelPayment from "./CancelPayment";
 
 
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/account/bookings/:id" element={<BookingPage />} />
           <Route path="/place/:id" element={<PlacePage />} />
           <Route path="/isauthor" element={<Isauthor />} />
+          <Route path="/cancel/:id" element={<CancelPayment />} />
          
          
          

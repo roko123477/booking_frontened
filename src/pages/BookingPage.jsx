@@ -30,7 +30,7 @@ const BookingPage = () => {
       setRedirect(true);
     }
   }
-  console.log(redirect);
+  //console.log(redirect);
   if(redirect){
     return <Navigate to={"/account/bookings"} />
   }
