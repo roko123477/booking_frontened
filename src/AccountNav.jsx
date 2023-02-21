@@ -12,12 +12,12 @@ const AccountNav = () => {
     if (type === subpage) {
       classes += " bg-primary text-white";
     } else {
-      classes += " bg-gray-200";
+      classes += " bg-gray-500";
     }
     return classes;
   };
   return (
-    <nav className="w-full flex justify-center mt-8 gap-2 mb-8">
+    <nav className="w-full flex text-white justify-center mt-8 gap-2 mb-8">
       <Link className={linkClasses("profile")} to={"/account"}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -34,6 +34,23 @@ const AccountNav = () => {
           />
         </svg>
         My Profile
+      </Link>
+      <Link className={linkClasses("password")} to={"/account/password"}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+          />
+        </svg>
+        change password
       </Link>
 
       <Link className={linkClasses("bookings")} to={"/account/bookings"}>

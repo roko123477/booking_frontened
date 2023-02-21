@@ -34,7 +34,7 @@ export default function PlaceGallery({ place }) {
                 <div className="flex flex-col max-w-5xl mx-auto" key={i}>
                   <img
                     className="w-full max-w-full transition-shadow ease-in-out duration-700 hover:shadow-3xl"
-                    src={"http://localhost:4000/uploads/" + photo}
+                    src={photo.url}
                     alt=""
                   />
                 </div>
@@ -54,7 +54,7 @@ export default function PlaceGallery({ place }) {
               <img
                 onClick={() => setShowAllPhotos(true)}
                 className="aspect-square cursor-pointer object-cover"
-                src={"http://localhost:4000/uploads/" + place.photos[0]}
+                src={place.photos[0].url}
                 alt=""
               />
             </div>
@@ -65,7 +65,7 @@ export default function PlaceGallery({ place }) {
             <img
               onClick={() => setShowAllPhotos(true)}
               className="aspect-square cursor-pointer object-cover"
-              src={"http://localhost:4000/uploads/" + place.photos[1]}
+              src={place.photos[1].url}
               alt=""
             />
           )}
@@ -74,7 +74,7 @@ export default function PlaceGallery({ place }) {
               <img
                 onClick={() => setShowAllPhotos(true)}
                 className="aspect-square cursor-pointer object-cover relative top-2"
-                src={"http://localhost:4000/uploads/" + place.photos[2]}
+                src={place.photos[2].url}
                 alt=""
               />
             )}

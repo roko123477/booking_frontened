@@ -24,23 +24,25 @@ export default function PlacePage() {
     <div className="py-4">
       <Header />
       <div className="container mx-auto">
-        <div className="mt-4 bg-gray-200 container mx-auto px-8 pt-8 rounded-3xl">
-          <Link to={"/"} className="text-3xl">
+        <div className="mt-6 bg-gray-500 container mx-auto px-8 pt-8 rounded-3xl">
+          <Link to={"/"} className="text-3xl text-white">
             {place.title}
           </Link>
-          <AddressLink>{place.address}</AddressLink>
+          <AddressLink className={"text-white mb-4"}>{place.address}</AddressLink>
           <PlaceGallery place={place} />
-          <div className="mt-8 mb-8 grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr]">
+          <div className="mt-8 mb-8 grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr] ">
             <div>
-              <div className="my-4">
+              <div className="my-4 text-white">
                 <h2 className="font-semibold text-2xl">Description</h2>
                 {place.description}
               </div>
-              Check-in: {place.checkIn}
+              <span className="text-white">Check-in: {place.checkIn}</span>
               <br />
-              Check-out: {place.checkOut}
+              <span className="text-white">Check-out: {place.checkOut}</span>
+              
               <br />
-              Max number of guests: {place.maxGuests}
+              <span className="text-white">Max number of guests: {place.maxGuests}</span>
+              
             </div>
             <div>
               <BookingWidget place={place} />
@@ -50,7 +52,7 @@ export default function PlacePage() {
             <div>
               <h2 className="font-semibold text-2xl">Extra info</h2>
             </div>
-            <div className="mb-4 mt-2 text-sm text-gray-700 leading-5">
+            <div className="mb-4 mt-2 text-sm text-black leading-5">
               {place.extraInfo}
             </div>
           </div>

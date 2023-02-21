@@ -14,7 +14,7 @@ const Perks = ({ selected, onChange }) => {
     <div className="grid mt-2 gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
       {/* TODO: Add styling label*/}
 
-      <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
+      <label className="border bg-gray-500 text-white p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input type="checkbox" onChange={handlecbClick} checked={selected.includes('wifi')} name="wifi" />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ const Perks = ({ selected, onChange }) => {
 
         <span>Wifi</span>
       </label>
-      <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
+      <label className="border bg-gray-500 text-white p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input type="checkbox" checked={selected.includes('parking')} onChange={handlecbClick} name="parking" />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ const Perks = ({ selected, onChange }) => {
 
         <span>Free parking spot</span>
       </label>
-      <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
+      <label className="border bg-gray-500 text-white p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input type="checkbox" onChange={handlecbClick} checked={selected.includes('tv')} name="tv" />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ const Perks = ({ selected, onChange }) => {
 
         <span>TV</span>
       </label>
-      <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
+      <label className="border bg-gray-500 text-white p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input type="checkbox" onChange={handlecbClick} checked={selected.includes('radio')} name="radio" />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +90,7 @@ const Perks = ({ selected, onChange }) => {
 
         <span>Radio</span>
       </label>
-      <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
+      <label className="border bg-gray-500 text-white p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input type="checkbox" onChange={handlecbClick} checked={selected.includes('pets')} name="pets" />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +109,7 @@ const Perks = ({ selected, onChange }) => {
 
         <span>Pets</span>
       </label>
-      <label className="border p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
+      <label className="border bg-gray-500 text-white p-4 flex rounded-2xl gap-2 items-center cursor-pointer">
         <input type="checkbox" onChange={handlecbClick} checked={selected.includes('entrance')} name="entrance" />
         <svg
           xmlns="http://www.w3.org/2000/svg"

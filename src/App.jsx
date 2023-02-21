@@ -14,10 +14,12 @@ import BookingsPage from './pages/BookingsPage';
 import BookingPage from './pages/BookingPage';
 import Isauthor from "./Isauthor";
 import CancelPayment from "./CancelPayment";
+import PasswordChange from "./PasswordChange";
+import ChangePasswordPage from "./ChangePasswordPage";
 
 
 
-axios.defaults.baseURL = "http://127.0.0.1:4000";
+axios.defaults.baseURL =import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
 //TODO:npm run dev for vite
 function App() {
@@ -30,6 +32,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/account" element={<ProfilePage />} />
+          <Route path="/password" element={<ChangePasswordPage />} />
+          <Route path="/account/password" element={<PasswordChange />} />
           <Route path="/account/places" element={<PlacesPage />} />
           <Route path="/account/places/new" element={<PlacesFormPage />} />
           <Route path="/account/places/:id" element={<PlacesFormPage />} />

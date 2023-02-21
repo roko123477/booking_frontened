@@ -4,12 +4,16 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
   const [photoLink, setPhotolink] = useState("");
   const uploadPhotoByLink = async (e) => {
     e.preventDefault();
-    const { data: filename } = await axios.post("/upload-by-link", {
+    const { data } = await axios.post("/upload-by-link", {
       link: photoLink,
     });
+    // console.log(data);
+    const filenames = { url: data.url, filename: data.filename };
+
     onChange((prev) => {
-      return [...prev, filename];
+      return [...prev, filenames];
     });
+
     setPhotolink("");
   };
   const uploadPhoto = (e) => {
@@ -23,23 +27,43 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
         headers: { "Content-type": "multipart/form-data" },
       })
       .then((response) => {
-        const { data: filenames } = response;
+        //  console.log(response);
+        const { data } = response;
+        //  console.log(data);
+        const filenames = [];
+        for (let i = 0; i < data.length; i++) {
+          filenames.push({ url: data[i].url, filename: data[i].filename });
+        }
+        //  console.log(...filenames);
         onChange((prev) => {
           return [...prev, ...filenames];
         });
       });
   };
-
-  const removePhoto = (e,filename) => {
+  // console.log(addedPhotos);
+  const removePhoto = async (e, filename) => {
     e.preventDefault();
-    onChange([...addedPhotos.filter((photo) => photo !== filename)]);
+    try {
+     // console.log(filename);
+      const { data } = await axios.delete("/delete/images", {
+        data:{
+          fileObject: filename,
+        }
+      });
+      onChange([...addedPhotos.filter((photo) => photo !== filename)]);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
-  const selectAsMainPhoto=(e,filename) => {
+  const selectAsMainPhoto = (e, filename) => {
     e.preventDefault();
-    const addedPhotosWithoutSelected=addedPhotos.filter((photo) => photo !== filename);
-    const newAddedPhotos=[filename,...addedPhotosWithoutSelected];
+    const addedPhotosWithoutSelected = addedPhotos.filter(
+      (photo) => photo !== filename
+    );
+    const newAddedPhotos = [filename, ...addedPhotosWithoutSelected];
     onChange(newAddedPhotos);
-  }
+  };
   return (
     <>
       <div className="flex gap-2">
@@ -51,7 +75,7 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
         />
         <button
           onClick={uploadPhotoByLink}
-          className="bg-gray-200 px-4 rounded-2xl"
+          className="bg-gray-500 px-4 rounded-2xl text-white"
         >
           Add&nbsp;Photo
         </button>
@@ -59,14 +83,11 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
 
       <div className="mt-2 gap-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {addedPhotos.length > 0 &&
-          addedPhotos.map((link) => (
-            <div key={link} className="h-32 relative flex">
-              <img
-                className="rounded-2xl w-full object-cover"
-                src={"http://127.0.0.1:4000/uploads/" + link}
-              />
+          addedPhotos.map((link, i) => (
+            <div key={i} className="h-32 relative flex">
+              <img className="rounded-2xl w-full object-cover" src={link.url} />
               <button
-                onClick={(e) => removePhoto(e,link)}
+                onClick={(e) => removePhoto(e, link)}
                 className="cursor-pointer absolute bottom-1 right-1 text-white bg-black bg-opacity-50 rounded-2xl py-2 px-2"
               >
                 <svg
@@ -85,7 +106,7 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
                 </svg>
               </button>
               <button
-                onClick={(e) => selectAsMainPhoto(e,link)}
+                onClick={(e) => selectAsMainPhoto(e, link)}
                 className="cursor-pointer absolute bottom-1 left-1 text-white bg-black bg-opacity-50 rounded-2xl py-2 px-2"
               >
                 {link === addedPhotos[0] && (
@@ -121,7 +142,7 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
               </button>
             </div>
           ))}
-        <label className="h-32 cursor-pointer flex items-center gap-1 justify-center border bg-transparent rounded-2xl p-2 text-2xl text-gray-600">
+        <label className="h-32 cursor-pointer flex items-center gap-1 justify-center border border-black bg-transparent rounded-2xl p-2 text-2xl text-black">
           <input
             type="file"
             multiple

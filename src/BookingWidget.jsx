@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+
 //import PropTypes from "prop-types";
 //import StripeCheckout from "react-stripe-checkout";
 import { useState } from "react";
@@ -29,14 +30,36 @@ const BookingWidget = ({ place }) => {
 
   //  console.log(numberOfNights);
   //}
+
+  const disableDates=()=>{
+    var today,dd,mm1,yyyy,mm;
+    today=new Date();
+    dd=today.getDate()+1;
+    mm1=today.getMonth()+1;
+    yyyy=today.getFullYear();
+    //console.log(dd,mm,yyyy);
+    mm1=mm1.toString(); 
+    if(mm1.length===1){
+      mm='0'+mm1;
+    }
+    else{
+      mm=mm1;
+    }
+    return (yyyy+"-"+mm+"-"+dd).toString();
+  }
+
   const { user } = useContext(UserContext);
-  const isAuthor = JSON.stringify(user._id) === JSON.stringify(place.owner);
 
   useEffect(() => {
     if (user) {
       setName(user.name);
     }
   }, [user]);
+
+  let isAuthor = false;
+  if (user) {
+    isAuthor = JSON.stringify(user._id) === JSON.stringify(place.owner);
+  }
 
   useEffect(() => {
     axios.get("/bookings").then((response) => {
@@ -80,12 +103,14 @@ const BookingWidget = ({ place }) => {
     //  console.log(dateBetween);
   };
   // console.log(numberOfNights);
-  if (isAuthor) {
-    return <Navigate to={"/isauthor"} />;
-  }
+  // if (isAuthor) {
+  //   return <Navigate to={"/isauthor"} />;
+  // }
   // if (redirect) {
   //   return <Navigate to={redirect} />;
   // }
+  let datesDisabled=disableDates();
+  // console.log(datesDisabled)
   return (
     <div className="bg-white shadow p-4 rounded-2xl">
       <div className="text-2xl text-center">
@@ -98,9 +123,11 @@ const BookingWidget = ({ place }) => {
         <div className="flex">
           <div className="py-3 px-4">
             <label htmlFor="">Check In:</label>
+            
             <input
               className="cursor-pointer"
               type="date"
+              min={datesDisabled}
               value={checkIn}
               onChange={(e) => setCheckIn(e.target.value)}
             />
@@ -109,7 +136,9 @@ const BookingWidget = ({ place }) => {
             <label htmlFor="">Check Out</label>
             <input
               type="date"
+              min={datesDisabled}
               value={checkOut}
+
               onChange={(e) => setCheckOut(e.target.value)}
             />
           </div>
@@ -122,6 +151,8 @@ const BookingWidget = ({ place }) => {
             onChange={(e) => setNumberOfGuests(e.target.value)}
           />
         </div>
+        {isAuthor && checkIn && checkOut && <Navigate to={"/isauthor"} />}
+
         {numberOfNights > 0 && numberOfNights !== 1000000000 && (
           <div className="py-3 px-4 border-t">
             <label htmlFor="">Your Full Name:</label>

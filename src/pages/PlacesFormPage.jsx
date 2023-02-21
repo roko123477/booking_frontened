@@ -38,10 +38,10 @@ const PlacesFormPage = () => {
   }, [id]);
 
   function inputHeader(text) {
-    return <h2 className="text-2xl mt-4">{text}</h2>;
+    return <h2 className="text-2xl text-black mt-4">{text}</h2>;
   }
   function inputDescription(text) {
-    return <p className="text-gray-500 text-sm">{text}</p>;
+    return <p className="text-gray-800 text-sm">{text}</p>;
   }
   function preInput(header, description) {
     return (
@@ -98,7 +98,7 @@ const PlacesFormPage = () => {
       <div className="md:container md:mx-auto px-10">
         <AccountNav />
         {id && (<div onClick={handleClick} className="-mx-5">
-          <span className="w-60 mx-2 flex bg-gray-200 rounded-2xl text-2xl p-2 m-2 cursor-pointer">
+          <span className="w-60 mx-2 flex bg-gray-500 rounded-2xl text-2xl p-2 m-2 cursor-pointer text-white">
             Delete this place
             <button
               // onClick={handleleClick(place._id)}

@@ -7,17 +7,28 @@ import PlaceImg from "../PlaceImg";
 
 const PlacesPage = () => {
   const [places, setPlaces] = useState([]);
+  const [dupplaces, setDupPlaces] = useState([]);
   //  console.log(places);
   useEffect(() => {
     axios.get("/user-places").then(({ data }) => {
       setPlaces(data);
+      setDupPlaces(data);
     });
   }, []);
-
-
+  const handlePlaces = (place)=>{
+    if(place==""){
+      setPlaces(dupplaces);
+    }
+    else{
+   // console.log(place);
+    const newPlace=dupplaces.filter(thisplace => thisplace.title.toLowerCase().includes(place.toLowerCase()));
+    setPlaces(newPlace);
+    }
+  }
+//img
   return (
     <div className="py-4 flex flex-col min-h-screen">
-      <Header />
+      <Header getPlaces={handlePlaces} searchBy={"Search By Title"}/>
       <div>
         <AccountNav />
 
@@ -49,14 +60,14 @@ const PlacesPage = () => {
               <Link
                 to={"/account/places/" + place._id}
                 key={i}
-                className="flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl"
+                className="flex cursor-pointer gap-4 bg-gray-100 p-4 rounded-2xl mb-3 mx-auto container"
               >
                 <div className="flex w-32 h-32 bg-gray-300 rounded-2xl grow shrink-0">
                   <PlaceImg place={place} />
                 </div>
                 <div className="grow-0 shrink">
-                  <h2 className="text-xl">{place.title}</h2>
-                  <p className="text-sm mt-2">{place.description}</p>
+                  <h2 className="text-2xl text">{place.title}</h2>
+                  <p className="text-lg mt-2 text-gray-800">{place.description}</p>
                 </div>
               </Link>
             ))}

@@ -37,13 +37,20 @@ const IndexPage = () => {
   return (
     <div className="py-4">
       <Header getPlaces={handlePlaces} searchBy={"Search By Places"} />
-      <div className="mt-8 grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
         {places.length > 0 &&
           places.map((place, i) => (
             <Link to={"/place/" + place._id} className="" key={i}>
-              <div className="bg-gray-500 mb-2 rounded-2xl flex">
+              <div className="bg-gray-300 mb-2 rounded-2xl flex">
                 {/* //swiper */}
                 <Swiper
+                  // style={{
+                  //   "--swiper-navigation-color": "#d7f3fa",
+                  //   "--swiper-navigation-size": "25px",
+                  //   "--swiper-pagination-color": "#d7f3fa",
+                  //   "--swiper-pagination-bullet-inactive-color": "#999999",
+                  //   "--swiper-pagination-bullet-inactive-opacity": "1",
+                  // }}
                   className="swiperjs-container"
                   spaceBetween={30}
                   speed={1000}
@@ -55,16 +62,16 @@ const IndexPage = () => {
                   pagination={{
                     clickable: true,
                   }}
+                  loop={true}
                   navigation={false}
                   modules={[Autoplay, Pagination, Navigation]}
-                  
                 >
                   {place.photos &&
                     place.photos.map((photo, i) => (
                       <SwiperSlide key={i}>
                         <img
                           className="rounded-2xl object-cover aspect-square"
-                          src={"http://localhost:4000/uploads/" + photo}
+                          src={photo.url}
                           alt=""
                         />
                       </SwiperSlide>
@@ -74,7 +81,7 @@ const IndexPage = () => {
               </div>
               <h2 className="font-bold">{place.address}</h2>
               <h3 className="text-sm text-gray-500">{place.title}</h3>
-              <div className="mt-1">
+              <div className="">
                 <span className="font-bold">₹{place.price}</span> per night
               </div>
             </Link>

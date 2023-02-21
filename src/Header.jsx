@@ -4,13 +4,14 @@ import { UserContext } from "./UserContext";
 
 const Header = ({getPlaces,searchBy}) => {
   const { user } = useContext(UserContext);
+  //console.log(user);
   const[name,setName]=useState("");
   const handleChange=(e) => {
     getPlaces(e.target.value);
     setName(e.target.value);
   }
   return (
-    <header className="flex justify-between my-.5">
+    <header className="flex justify-between my-1">
       <Link to={"/"} className="flex items-center gap-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +19,7 @@ const Header = ({getPlaces,searchBy}) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="#3792cb"
-          className="w-6 h-6"
+          className="w-8 h-8"
         >
           <path
             strokeLinecap="round"
@@ -27,21 +28,21 @@ const Header = ({getPlaces,searchBy}) => {
           />
         </svg>
 
-        <span className="font-bold text-2xl text-gray-500">
+        <span className="font-bold md:text-3xl text-gray-500">
           π<sup className="text-primary">book</sup>
         </span>
       </Link>
-      <div className="bg-white items-center justify-between flex w-96 rounded-full sticky mt-.5">
+      <div className="items-center justify-between flex w-96 rounded-full sticky mt-.5">
         
         <input
-          className="font-bold rounded-full w-full py-4 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-base"
+          className="font-bold rounded-full py-4 pl-4 md:-mx-12 sm: -mx-1 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-base"
           type="text"
           placeholder={searchBy}
           value={name}
           onChange={handleChange}
         />
 
-        <div className="bg-primary p-2 hover:bg-gray-400 cursor-pointer mx-2 rounded-full">
+        <div className="bg-primary p-2 hover:bg-gray-400 cursor-pointer -mx-1 rounded-full">
           <svg
             className="w-6 h-6 text-white"
             xmlns="http://www.w3.org/2000/svg"
