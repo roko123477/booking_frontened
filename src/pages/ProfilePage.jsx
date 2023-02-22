@@ -81,7 +81,7 @@ const ProfilePage = () => {
   //   return <Navigate to={"/login"} />;
   // }
   if (redirect) {
-    window.location.href="/";
+    window.location.href=import.meta.env.VITE_CLIENT_URL;
   }
   return (
     <div className="py-4 flex flex-col min-h-screen">
