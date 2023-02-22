@@ -77,11 +77,11 @@ const ProfilePage = () => {
     return "Loading...";
   }
 
-  if (ready && !user && !redirect) {
-    return <Navigate to={"/login"} />;
-  }
+  // if (ready && !user && !redirect) {
+  //   return <Navigate to={"/login"} />;
+  // }
   if (redirect) {
-    return <Navigate to={redirect} />;
+    window.location.href="/";
   }
   return (
     <div className="py-4 flex flex-col min-h-screen">
