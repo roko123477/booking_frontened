@@ -19,7 +19,7 @@ const ProfilePage = () => {
   }
   const { ready, user, setUser } = useContext(UserContext);
 
-  const [redirect, setRedirect] = useState(null);
+  const [redirect, setRedirect] = useState(false);
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -69,7 +69,7 @@ const ProfilePage = () => {
 
   async function logout() {
     await axios.post("/logout");
-    setRedirect("/");
+    setRedirect(true);
     setUser(null);
   }
 
