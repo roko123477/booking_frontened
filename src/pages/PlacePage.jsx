@@ -5,6 +5,8 @@ import BookingWidget from "../BookingWidget";
 import PlaceGallery from "../PlaceGallery";
 import AddressLink from "../AddressLink";
 import Header from "../Header";
+import ReviewPages from "./ReviewPages";
+// import ReviewFormPage from "./ReviewFormPage";
 
 export default function PlacePage() {
   const { id } = useParams();
@@ -15,7 +17,7 @@ export default function PlacePage() {
     }
     axios.get(`/places/${id}`).then((response) => {
       setPlace(response.data);
-    });   
+    });
   }, [id]);
   if (!place) return "";
 
@@ -28,7 +30,10 @@ export default function PlacePage() {
           <Link to={"/"} className="text-3xl text-white">
             {place.title}
           </Link>
-          <AddressLink className={"text-white mb-4"}>{place.address}</AddressLink>
+          
+          <AddressLink className={"text-white my-3"}>
+            {place.address}
+          </AddressLink>
           <PlaceGallery place={place} />
           <div className="mt-8 mb-8 grid gap-8 grid-cols-1 md:grid-cols-[2fr_1fr] ">
             <div>
@@ -39,10 +44,11 @@ export default function PlacePage() {
               <span className="text-white">Check-in: {place.checkIn}</span>
               <br />
               <span className="text-white">Check-out: {place.checkOut}</span>
-              
+
               <br />
-              <span className="text-white">Max number of guests: {place.maxGuests}</span>
-              
+              <span className="text-white">
+                Max number of guests: {place.maxGuests}
+              </span>
             </div>
             <div>
               <BookingWidget place={place} />
@@ -57,6 +63,8 @@ export default function PlacePage() {
             </div>
           </div>
         </div>
+        <ReviewPages />
+        {/*  */}
       </div>
     </div>
   );

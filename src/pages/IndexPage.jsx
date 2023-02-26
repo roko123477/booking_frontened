@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -12,11 +12,14 @@ import "swiper/css/navigation";
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper";
 import Header from "../Header";
+ import { useContext } from "react";
+import { UserContext } from "../UserContext";
 
 const IndexPage = () => {
+  const navigate = useNavigate();
   const [places, setPlaces] = useState([]);
   const [duplicatePlaces, setDuptPlaces] = useState([]);
-
+  const { user } = useContext(UserContext);
   useEffect(() => {
     axios.get("/places").then((response) => {
       setPlaces(response.data);
@@ -34,17 +37,27 @@ const IndexPage = () => {
       setPlaces(newPlace);
     }
   };
+  
+  const handleClick=(id)=>{
+    console.log(user);
+    if(user){
+      navigate (`/place/${id}`); 
+    }
+    else{
+      navigate (`/login`); 
+    }
+  }
   return (
     <div className="py-4">
       <Header getPlaces={handlePlaces} searchBy={"Search By Places"} />
       <div className="mt-8 grid gap-x-6 gap-y-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
         {places.length > 0 &&
           places.map((place, i) => (
-            <Link to={"/place/" + place._id} className="" key={i}>
+            <div onClick={()=>handleClick(place._id)} className="cursor-pointer" key={i}>
               <div className="bg-gray-300 mb-2 rounded-2xl flex">
                 {/* //swiper */}
                 <Swiper
-                  // style={{
+                  // style={{to={"/place/" + place._id} 
                   //   "--swiper-navigation-color": "#d7f3fa",
                   //   "--swiper-navigation-size": "25px",
                   //   "--swiper-pagination-color": "#d7f3fa",
@@ -84,7 +97,7 @@ const IndexPage = () => {
               <div className="">
                 <span className="font-bold">₹{place.price}</span> per night
               </div>
-            </Link>
+            </div>
           ))}
       </div>
     </div>
